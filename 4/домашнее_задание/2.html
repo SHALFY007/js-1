@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Homework</title>
 </head>
+
 <body>
-<!--
+  <!--
 Обязательное задание.
 
 Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
@@ -47,10 +49,68 @@
 что-нибудь пропустить.
 4. Если непонятно условие - задайте вопрос.
 -->
-<script>
-  "use strict";
+  <script>
+    "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
-</script>
+    function PostES5(author, text) {
+      this.author = author;
+      this.text = text;
+      this.date = new Date();
+    }
+    PostES5.prototype.edit = function (text) {
+      this.text = text;
+      this.date = new Date();
+    };
+    const postES5 = new PostES5('Иван', 'Hello World!');
+
+    function AttachedPostES5(text, author) {
+      PostES5.call(this, text, author);
+
+      this.highlighted = false;
+    }
+    AttachedPostES5.prototype = Object.create(PostES5.prototype);
+    AttachedPostES5.prototype.constructor = AttachedPostES5;
+    AttachedPostES5.prototype.makeTextHighlighted = function () {
+      this.highlighted = true;
+
+      this.date = new Date();
+    };
+
+
+    const newPost = new AttachedPostES5('Иван', "Текст");
+    console.log(newPost);
+    newPost.makeTextHighlighted();
+    newPost.edit('Новый текст');
+    console.log(newPost);
+
+
+
+    class PostES6 {
+      constructor(author, text) {
+        this.author = author;
+        this.text = text;
+        this.date = new Date();
+      }
+      edit(text) {
+        this.text = text;
+        this.date = new Date();
+      }
+    }
+    const postES6 = new PostES6('Иван', 'Текст');
+    class AttachedPostES6 extends PostES6 {
+      highlighted = false;
+      makeTextHighlighted() {
+        this.highlighted = true;
+        this.date = new Date();
+      }
+    }
+    const newPostES6 = new AttachedPostES6('Иван', 'Текст');
+    console.log(newPostES6);
+    newPostES6.edit('Другой текст');
+    newPostES6.makeTextHighlighted();
+    console.log(newPostES6);
+
+  </script>
 </body>
+
 </html>
