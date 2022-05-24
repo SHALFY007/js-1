@@ -103,6 +103,12 @@
     Если клик был не по кнопке, то ничего выводить не нужно.
     Необходимо использовать делегирование.
      */
+    const ulEl = document.querySelector('ul');
+    ulEl.addEventListener('click', (event) => {
+      if (event.target.tagName == 'BUTTON') {
+        console.log(event.target.textContent);
+      }
+    });
 
 
     /*
@@ -110,11 +116,17 @@
     потом выводится текст из 3 задания, если мы кликаем по кнопкам в ul?
     Ответ необходимо написать здесь же, под этим комментарием, своими словами.
     */
-
+    /*В 5 задании обращение идет напрямую к тегам ul, а в 3 на все теги,
+     следовательно 5 задание отработает быстрее*/
 
     /*
     7. С помощью JS необходимо изменить цвет заднего фона каждого второго тега li.
      */
+    const liEl = document.querySelectorAll('li:nth-child(2n)');
+    liEl.forEach((element) => {
+      element.style.backgroundColor = 'green';
+    }
+    );
 
   </script>
 </body>
